@@ -189,17 +189,16 @@ namespace JanKenPo
   class JanKenPoConfiguration
   {
     private readonly List<JanKenPoValue> configuration;
-
+    private readonly Random random;
     public JanKenPoConfiguration(List<JanKenPoValue> configuratedValues)
     {
-      this.configuration = configuratedValues;
+      this.configuration = configuratedValues; 
+      random = new Random(DateTime.Now.Second);
     }
 
     public JanKenPoValue PickOption()
     {
-      Random random = new Random(DateTime.Now.Millisecond);
       int randomNumber = random.Next(0, configuration.Count);
-
       return configuration[randomNumber];
     }
   }
