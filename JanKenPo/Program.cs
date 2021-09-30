@@ -14,6 +14,8 @@ namespace JanKenPo
         new JanKenPoPlayer("Maria"),
         new JanKenPoPlayer("Estevão"),
         new JanKenPoPlayer("José"),
+        new JanKenPoPlayer("Goku"),
+        new JanKenPoPlayer("Vegeta"),
       };
 
       JanKenPoConfiguration config = CreateMatchConfiguration();
@@ -160,17 +162,18 @@ namespace JanKenPo
       JanKenPoPlayer winner = null;
       while(winner == null)
       {
+        Console.WriteLine("====================================");
+        Console.WriteLine("====================================");
         winner = StartMatch();
 
         if(winner == null)
         {
           Console.WriteLine("Ninguém venceu!");
-          Console.WriteLine("====================================");
-          Console.WriteLine("====================================");
-          Console.WriteLine("");
-          Console.WriteLine("");
         }
-        
+        Console.WriteLine("====================================");
+        Console.WriteLine("====================================");
+        Console.WriteLine("");
+        Console.WriteLine("");
       }
 
       return new JanKenPoFightResult($"O vencedor é {winner.Name}");
