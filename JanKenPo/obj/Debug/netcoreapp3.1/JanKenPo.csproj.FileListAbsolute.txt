@@ -11,3 +11,16 @@ C:\Users\estev\source\repos\JanKenPo\bin\Debug\netcoreapp3.1\JanKenPo.pdb
 C:\Users\estev\source\repos\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.dll
 C:\Users\estev\source\repos\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.pdb
 C:\Users\estev\source\repos\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.genruntimeconfig.cache
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\bin\Debug\netcoreapp3.1\JanKenPo.exe
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\bin\Debug\netcoreapp3.1\JanKenPo.deps.json
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\bin\Debug\netcoreapp3.1\JanKenPo.runtimeconfig.json
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\bin\Debug\netcoreapp3.1\JanKenPo.runtimeconfig.dev.json
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\bin\Debug\netcoreapp3.1\JanKenPo.dll
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\bin\Debug\netcoreapp3.1\JanKenPo.pdb
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.csprojAssemblyReference.cache
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.AssemblyInfoInputs.cache
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.AssemblyInfo.cs
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.csproj.CoreCompileInputs.cache
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.dll
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.pdb
+C:\Users\estev\source\repos\JanKenPoProject\JanKenPo\obj\Debug\netcoreapp3.1\JanKenPo.genruntimeconfig.cache

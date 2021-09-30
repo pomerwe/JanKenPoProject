@@ -23,6 +23,7 @@ namespace JanKenPo
       JanKenPoMatch match = new JanKenPoMatch(config, players);
       JanKenPoMatchResult result = match.Match();
       Console.WriteLine(result.ToString());
+      Console.ReadKey();
     }
 
     public static JanKenPoConfiguration CreateMatchConfiguration()
