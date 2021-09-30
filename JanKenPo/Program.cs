@@ -8,11 +8,16 @@ namespace JanKenPo
   {
     static void Main(string[] args)
     {
-      JanKenPoPlayer playerOne = new JanKenPoPlayer("João");
-      JanKenPoPlayer playerTwo = new JanKenPoPlayer("Maria");
+      List<JanKenPoPlayer> players = new List<JanKenPoPlayer>()
+      {
+        new JanKenPoPlayer("João"),
+        new JanKenPoPlayer("Maria"),
+        new JanKenPoPlayer("Estevão"),
+        new JanKenPoPlayer("José"),
+      };
 
       JanKenPoConfiguration config = CreateMatchConfiguration();
-      JanKenPoMatch match = new JanKenPoMatch(config, playerOne, playerTwo);
+      JanKenPoMatch match = new JanKenPoMatch(config, players);
 
       Console.WriteLine(match.GetFightResult().GetResult());
     }
@@ -46,9 +51,31 @@ namespace JanKenPo
   class JanKenPoPlayer
   {
     public string Name { get; set; }
+    private JanKenPoValue playerOption;
+
+    public int LoseCount { get; set; }
+    public int WinCount { get; set; }
+    public int DrawCount { get; set; }
     public JanKenPoPlayer(string name)
     {
       Name = name;
+    }
+
+    public void SetPlayerOption(JanKenPoValue value)
+    {
+      playerOption = value;
+    }
+
+    public JanKenPoValue GetPlayerOption()
+    {
+      return playerOption;
+    }
+
+    public void ResetCount()
+    {
+      LoseCount = 0;
+      WinCount = 0;
+      DrawCount = 0;
     }
   }
 
@@ -56,41 +83,97 @@ namespace JanKenPo
   class JanKenPoMatch
   {
     private readonly JanKenPoConfiguration gameConfiguration;
-    private readonly JanKenPoPlayer playerOne;
-    private readonly JanKenPoPlayer playerTwo;
+    List<JanKenPoPlayer> players;
+    List<JanKenPoPlayer> alreadyFightedOthers;
 
-    public JanKenPoMatch(JanKenPoConfiguration gameConfiguration, JanKenPoPlayer playerOne, JanKenPoPlayer playerTwo)
+    public JanKenPoMatch(JanKenPoConfiguration gameConfiguration, List<JanKenPoPlayer> players)
     {
       this.gameConfiguration = gameConfiguration;
-      this.playerOne = playerOne;
-      this.playerTwo = playerTwo;
+      this.players = players;
+    }
+    
+    private void Fight(JanKenPoPlayer firstFighter, JanKenPoPlayer secondFighter)
+    {
+      if(firstFighter.GetPlayerOption() == secondFighter.GetPlayerOption())
+      {
+        firstFighter.DrawCount++;
+        secondFighter.DrawCount++;
+      }
+      else
+      {
+        if (firstFighter.GetPlayerOption().Beats(secondFighter.GetPlayerOption()))
+        {
+          firstFighter.WinCount++;
+          secondFighter.LoseCount++;
+        }
+        else
+        {
+          firstFighter.LoseCount++;
+          secondFighter.WinCount++;
+        }
+      }
+    }
+
+    private void SetPlayersOptions()
+    {
+      players.ForEach(p =>
+      {
+        p.SetPlayerOption(gameConfiguration.PickOption());
+
+        Console.WriteLine($"{p.Name} joga {p.GetPlayerOption().Name}");
+      });
+    }
+
+    private void DuelAllPlayers()
+    {
+      alreadyFightedOthers = new List<JanKenPoPlayer>();
+      for (int i = 0; i < players.Count; i++)
+      {
+        JanKenPoPlayer currentPlayer = players[i];
+
+        foreach (var target in players)
+        {
+          if (target == currentPlayer || alreadyFightedOthers.Contains(target))
+          {
+            continue;
+          }
+          Fight(currentPlayer, target);
+        }
+        alreadyFightedOthers.Add(currentPlayer);
+      }
+    }
+
+    private JanKenPoPlayer StartMatch()
+    {
+      players.ForEach(p =>
+      {
+        p.ResetCount();
+      });
+      SetPlayersOptions();
+      DuelAllPlayers();
+
+      return players.FirstOrDefault(p => p.WinCount == players.Count - 1);
     }
 
     public JanKenPoFightResult GetFightResult()
     {
-      JanKenPoValue playerOneValue = gameConfiguration.PickOption();
-      JanKenPoValue playerTwoValue = gameConfiguration.PickOption();
-
-      Console.WriteLine($"{playerOne.Name} joga {playerOneValue.Name}");
-      Console.WriteLine($"{playerTwo.Name} joga {playerTwoValue.Name}");
-
-      if (playerOneValue == playerTwoValue)
+      JanKenPoPlayer winner = null;
+      while(winner == null)
       {
-        return new JanKenPoFightResult("O jogo deu Empate");
+        winner = StartMatch();
+
+        if(winner == null)
+        {
+          Console.WriteLine("Ninguém venceu!");
+          Console.WriteLine("====================================");
+          Console.WriteLine("====================================");
+          Console.WriteLine("");
+          Console.WriteLine("");
+        }
+        
       }
 
-      string result;
-
-      if(playerOneValue.Fight(playerTwoValue))
-      {
-        result = $"{playerOne.Name}";
-      }
-      else
-      {
-        result = $"{playerTwo.Name}";
-      }
-      result += " é o vencedor!";
-      return new JanKenPoFightResult(result);
+      return new JanKenPoFightResult($"O vencedor é {winner.Name}");
     }
   }
 
@@ -128,9 +211,9 @@ namespace JanKenPo
       beatList.AddRange(value);
     }
 
-    public bool Fight(JanKenPoValue enemy)
+    public bool Beats(JanKenPoValue enemy)
     {
-      return beatList.Any(w => w == enemy);
+      return beatList.Any(b => b == enemy);
     }
   }
 
