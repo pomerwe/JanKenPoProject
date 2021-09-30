@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nSRg6V0JcY6K+t7vUlG8Jdgog/VSrozQdBCxcghCzZwJ4Q99RPwfBWdB+GjLr5/8T4CStSoWqYi8ZXqq01YKwA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\estev\\source\\repos\\JanKenPo\\JanKenPo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\estev\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+  ],
+  "logs": []
+}
