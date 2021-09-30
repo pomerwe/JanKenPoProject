@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\estev\\source\\repos\\JanKenPo\\JanKenPo.csproj",
+      "projectUniqueName": "C:\\Users\\estev\\source\\repos\\JanKenPoProject\\JanKenPo\\JanKenPo.csproj",
       "projectName": "JanKenPo",
-      "projectPath": "C:\\Users\\estev\\source\\repos\\JanKenPo\\JanKenPo.csproj",
+      "projectPath": "C:\\Users\\estev\\source\\repos\\JanKenPoProject\\JanKenPo\\JanKenPo.csproj",
       "packagesPath": "C:\\Users\\estev\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\estev\\source\\repos\\JanKenPo\\obj\\",
+      "outputPath": "C:\\Users\\estev\\source\\repos\\JanKenPoProject\\JanKenPo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

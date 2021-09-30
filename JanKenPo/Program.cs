@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace JanKenPo
 {
@@ -20,8 +21,8 @@ namespace JanKenPo
 
       JanKenPoConfiguration config = CreateMatchConfiguration();
       JanKenPoMatch match = new JanKenPoMatch(config, players);
-
-      Console.WriteLine(match.GetFightResult().GetResult());
+      JanKenPoMatchResult result = match.Match();
+      Console.WriteLine(result.ToString());
     }
 
     public static JanKenPoConfiguration CreateMatchConfiguration()
@@ -87,6 +88,7 @@ namespace JanKenPo
     private readonly JanKenPoConfiguration gameConfiguration;
     List<JanKenPoPlayer> players;
     List<JanKenPoPlayer> alreadyFightedOthers;
+    StringBuilder matchLog;
 
     public JanKenPoMatch(JanKenPoConfiguration gameConfiguration, List<JanKenPoPlayer> players)
     {
@@ -122,7 +124,7 @@ namespace JanKenPo
       {
         p.SetPlayerOption(gameConfiguration.PickOption());
 
-        Console.WriteLine($"{p.Name} joga {p.GetPlayerOption().Name}");
+        matchLog.AppendLine($"{p.Name} joga {p.GetPlayerOption().Name}");
       });
     }
 
@@ -157,26 +159,29 @@ namespace JanKenPo
       return players.FirstOrDefault(p => p.WinCount == players.Count - 1);
     }
 
-    public JanKenPoFightResult GetFightResult()
+    public JanKenPoMatchResult Match()
     {
       JanKenPoPlayer winner = null;
-      while(winner == null)
+
+      matchLog = new StringBuilder();
+      while (winner == null)
       {
-        Console.WriteLine("====================================");
-        Console.WriteLine("====================================");
+        matchLog.AppendLine("====================================");
+        matchLog.AppendLine("====================================");
         winner = StartMatch();
 
         if(winner == null)
         {
-          Console.WriteLine("Ninguém venceu!");
+          matchLog.AppendLine("Ninguém venceu!");
         }
-        Console.WriteLine("====================================");
-        Console.WriteLine("====================================");
-        Console.WriteLine("");
-        Console.WriteLine("");
+        matchLog.AppendLine("====================================");
+        matchLog.AppendLine("====================================");
+        matchLog.AppendLine("");
+        matchLog.AppendLine("");
       }
 
-      return new JanKenPoFightResult($"O vencedor é {winner.Name}");
+      matchLog.AppendLine($"O vencedor é {winner.Name}");
+      return new JanKenPoMatchResult(matchLog.ToString());
     }
   }
 
@@ -220,16 +225,16 @@ namespace JanKenPo
     }
   }
 
-  class JanKenPoFightResult
+  class JanKenPoMatchResult
   {
     private readonly string result;
 
-    public JanKenPoFightResult(string result)
+    public JanKenPoMatchResult(string matchLog)
     {
-      this.result = result;
+      this.result = matchLog;
     }
 
-    public string GetResult()
+    public override string ToString()
     {
       return result;
     }
